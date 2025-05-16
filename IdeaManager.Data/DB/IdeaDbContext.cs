@@ -8,10 +8,13 @@ namespace IdeaManager.Data.Db
     {
         public IdeaDbContext(DbContextOptions<IdeaDbContext> options) : base(options) { }
 
+        //tables
         public DbSet<Idea> Ideas => Set<Idea>();
+        public DbSet<Project> Projects => Set<Project>();
         public DbSet<User> Users => Set<User>();
         public DbSet<Vote> Votes => Set<Vote>();
 
+        //conf entite
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new IdeaConfiguration());

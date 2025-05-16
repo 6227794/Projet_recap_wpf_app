@@ -27,4 +27,10 @@ public class IdeaRepository : IRepository<Idea>
         _context.Ideas.Add(idea);
         await _context.SaveChangesAsync();
     }
+
+    public async Task UpdateAsync(Idea idea)
+    {
+        _context.Ideas.Update(idea);
+        await _context.SaveChangesAsync();
+    }
 }

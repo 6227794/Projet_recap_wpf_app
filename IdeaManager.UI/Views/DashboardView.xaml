@@ -9,6 +9,29 @@
       Title="DashboardView">
 
     <Grid>
-        
+        <StackPanel Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Dashboard" FontSize="25" FontStyle="Oblique" FontWeight="DemiBold" Margin="0 0 0 20"/>
+
+            <Button Content="Submit an idea"
+                    Width="200" Height="40"
+                    Margin="0 10"
+                    Click="OnSubmitIdeaClick"
+                    Background="Pink"
+                    />
+
+            <Button Content="See all ideas"
+                    Width="200" Height="40"
+                    Margin="0 10"
+                    Click="OnViewIdeasClick"
+                    Background="LightPink"
+                    />
+
+            <Button Content="See all projects"
+                    Width="200" Height="40"
+                    Margin="0 10"
+                    Click="OnViewProjectsClick"
+                    Background="HotPink"
+                    />
+        </StackPanel>
     </Grid>
 </Page>

@@ -21,4 +21,6 @@ public class Idea
 
     public int? ProjectId { get; set; }  // idée validée -> projet
     public Project? Project { get; set; }
+
+    public bool isDecisionMade => Status == IdeaStatus.Approved || Status == IdeaStatus.Rejected;
 }

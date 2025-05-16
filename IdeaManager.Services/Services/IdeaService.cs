@@ -4,6 +4,7 @@ using IdeaManager.Core.Enums;
 
 public class IdeaService : IIdeaService
 {
+    //dependance encapsule tt repo
     private readonly IUnitOfWork _unitOfWork;
 
     public IdeaService(IUnitOfWork unitOfWork)
@@ -11,6 +12,7 @@ public class IdeaService : IIdeaService
         _unitOfWork = unitOfWork;
     }
 
+    //donner new idea
     public async Task SubmitIdeaAsync(Idea idea)
     {
         if (string.IsNullOrWhiteSpace(idea.Title))
@@ -23,10 +25,14 @@ public class IdeaService : IIdeaService
         await _unitOfWork.SaveChangesAsync();
     }
 
+    //recupere tt idees
     public async Task<List<Idea>> GetAllAsync()
     {
         return await _unitOfWork.IdeaRepository.GetAllAsync();
     }
+
+
+    //coter pour ou contre
 
     public async Task VoteForIdeaAsync(int ideaId)
     {
@@ -36,6 +42,32 @@ public class IdeaService : IIdeaService
             throw new InvalidOperationException("Idée non trouvée.");
 
         idea.VoteCount++;
-        await _unitOfWork.IdeaRepository.AddAsync(idea); // Pour simuler une mise à jour simplifiée
+        await _unitOfWork.IdeaRepository.AddAsync(idea); //  mise à jour simplifiée
+    }
+
+    public async Task ApproveIdeaAsync(Idea idea)
+    {
+        var ideaFromDb = await _unitOfWork.IdeaRepository.GetByIdAsync(idea.Id);
+        if (ideaFromDb == null)
+            throw new InvalidOperationException("Idée introuvable");
+
+        ideaFromDb.Status = IdeaStatus.Approved;
+        ideaFromDb.VoteCount = 1;
+
+        await _unitOfWork.SaveChangesAsync();
+    
+    }
+
+    public async Task RejectIdeaAsync(Idea idea)
+    {
+        var ideaFromDb = await _unitOfWork.IdeaRepository.GetByIdAsync(idea.Id);
+        if (ideaFromDb == null)
+            throw new InvalidOperationException("Idée introuvable");
+
+        ideaFromDb.Status = IdeaStatus.Rejected;
+        ideaFromDb.VoteCount = 0;
+
+        await _unitOfWork.SaveChangesAsync();
+
     }
 }

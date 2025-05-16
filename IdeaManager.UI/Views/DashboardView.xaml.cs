@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace IdeaManager.UI.Views
 {
@@ -20,9 +21,53 @@ namespace IdeaManager.UI.Views
     /// </summary>
     public partial class DashboardView : Page
     {
-        public DashboardView()
+        private readonly IServiceProvider _serviceProvider;
+
+
+        //Initialisation .xaml
+        //Service injecter
+        //Stocker en pv pour methode de nav
+        public DashboardView(IServiceProvider serviceProvider)
         {
             InitializeComponent();
+            _serviceProvider = serviceProvider;
         }
+
+        //BTN SUBMIT IDEA
+        private void OnSubmitIdeaClick(object sender, RoutedEventArgs e)
+        {
+            var ideaFormView = _serviceProvider.GetRequiredService<IdeaFormView>();
+            NavigationService?.Navigate(ideaFormView);
+        }
+
+
+        //acces liste idee
+        private void OnViewIdeasClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var ideaListView = _serviceProvider.GetRequiredService<IdeaListView>();
+                NavigationService?.Navigate(ideaListView);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Navigation failed: " + ex.Message);
+            }
+        }
+
+        private void OnViewProjectsClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var projectListView = _serviceProvider.GetRequiredService<ProjectListView>();
+                NavigationService?.Navigate(projectListView);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Navigation to projects failed : " + ex.Message);
+            }
+        }
+
+
     }
 }

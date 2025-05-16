@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using IdeaManager.UI.ViewModels;
 
 namespace IdeaManager.UI.Views
 {
@@ -20,9 +21,21 @@ namespace IdeaManager.UI.Views
     /// </summary>
     public partial class IdeaFormView : Page
     {
-        public IdeaFormView()
+
+        //Construit contenu defini dans fichier .xaml 
+        public IdeaFormView(IdeaFormViewModel viewModel)
         {
             InitializeComponent();
+            DataContext = viewModel;
         }
+
+        private void OnBackClick(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService?.CanGoBack == true)
+            {
+                NavigationService.GoBack();
+            }
+        }
+
     }
 }
