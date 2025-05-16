@@ -70,4 +70,9 @@ public class IdeaService : IIdeaService
         await _unitOfWork.SaveChangesAsync();
 
     }
+
+    Task IIdeaService.ApprovedIdeaAsync(Idea idea)
+    {
+        throw new NotImplementedException();
+    }
 }

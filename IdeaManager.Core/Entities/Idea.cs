@@ -19,8 +19,5 @@ public class Idea
     // Relations
     public ICollection<Vote> Votes { get; set; } = new List<Vote>();
 
-    public int? ProjectId { get; set; }  // idée validée -> projet
-    public Project? Project { get; set; }
-
     public bool isDecisionMade => Status == IdeaStatus.Approved || Status == IdeaStatus.Rejected;
 }

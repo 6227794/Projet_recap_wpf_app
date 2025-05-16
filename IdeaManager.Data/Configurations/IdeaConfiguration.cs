@@ -17,10 +17,6 @@ namespace IdeaManager.Data.Configurations
             builder.Property(i => i.Description)
                    .HasMaxLength(500);
 
-            builder.HasOne(i => i.Project)
-                   .WithOne(p => p.Idea)
-                   .HasForeignKey<Project>(p => p.IdeaId);
-
             builder.HasMany(i => i.Votes)
                    .WithOne(v => v.Idea)
                    .HasForeignKey(v => v.IdeaId);

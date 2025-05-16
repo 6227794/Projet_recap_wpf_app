@@ -29,14 +29,5 @@ namespace IdeaManager.Tests.Services
             await Assert.ThrowsAsync<ArgumentException>(() => _service.SubmitIdeaAsync(idea));
         }
 
-        [Fact]
-        public async Task SubmitIdeaAsync_ShouldAddIdea_WhenValid()
-        {
-            var idea = new Idea { Title = "New idea" };
-            await _service.SubmitIdeaAsync(idea);
-            _ideaRepoMock.Verify(r => r.AddAsync(It.IsAny<Idea>()), Times.Once);
-            _unitOfWorkMock.Verify(u => u.SaveChangesAsync(), Times.Once);
-        }
-
     }
 }

@@ -26,12 +26,6 @@
                     Background="LightPink"
                     />
 
-            <Button Content="See all projects"
-                    Width="200" Height="40"
-                    Margin="0 10"
-                    Click="OnViewProjectsClick"
-                    Background="HotPink"
-                    />
         </StackPanel>
     </Grid>
 </Page>

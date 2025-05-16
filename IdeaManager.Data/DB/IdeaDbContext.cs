@@ -10,7 +10,6 @@ namespace IdeaManager.Data.Db
 
         //tables
         public DbSet<Idea> Ideas => Set<Idea>();
-        public DbSet<Project> Projects => Set<Project>();
         public DbSet<User> Users => Set<User>();
         public DbSet<Vote> Votes => Set<Vote>();
 
@@ -18,7 +17,6 @@ namespace IdeaManager.Data.Db
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new IdeaConfiguration());
-            modelBuilder.ApplyConfiguration(new ProjectConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new VoteConfiguration());
         }
